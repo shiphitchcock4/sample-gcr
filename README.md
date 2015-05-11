@@ -16,7 +16,7 @@ To create a project -
 * Enter a name and project ID or accept the defaults.
 * Click 'Create'
 
-2. Set up OAuth for your GDC project
+1. Set up OAuth for your GDC project
 
 * On the [Google Developers Console] (https://console.developers.google.com/) , select the project you just created
 * In the sidebar on the left, expand `APIs & auth` and select `Credentials`
@@ -24,7 +24,7 @@ To create a project -
 * Click on `Create Client ID`. A dialog box appears. To proceed, click `Okay, got it`
 * Your new Public/Private key pair is generated and downloaded to your machine. **Please store this carefully since you will not be able to retrieve this from your GDC account. You will need this key pair to set up GCR integration on Shippable.**
 
-3. Set up GCR Integration 
+1. Set up GCR Integration 
 
 If you want to interact with GCR in any part of your build workflow for your Shippable project, such as using your private images for your builds or pushing images to your repository, you need to connect your GCR project to your Shippable account. 
 
