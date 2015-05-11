@@ -1,10 +1,12 @@
 
 
-**Sample Node Project for Google Container Registry**
+**sample-gcr-nodejs**
 -----------------------------
-The Google Container Registry (GCR) provides secure, private Docker image storage on Google Cloud Platform. Using GCR has many advantages such as fine grained access control, server-side encryption of images, and super fast deployment to Google Container Engine and Google Compute Engine.
+A sample dockerized app to demonstrate Google Container Registry (GCR) functionality within Shippable.
 
-To read more about GCR, you can read Google's `documentation <https://cloud.google.com/tools/container-registry/>`_ or `announcement blog <http://googlecloudplatform.blogspot.com/2015/01/secure-hosting-of-private-Docker-repositories-in-Google-Cloud-Platform.html>`_ 
+**Overview**
+
+
 
 **Setting up GCR integration on Shippable**
 
@@ -164,3 +166,7 @@ If you are following the post-CI Dockerbuild workflow and  want to copy some bui
   ADD ./buildoutput/(artifacts file) (target)
 
 And that's it. Any artifacts you need will be available in your prod image.
+
+## Further Reading
+
+To read more about GCR, check out the [google documentation] (https://cloud.google.com/tools/container-registry/) or our [announcement blog] (http://googlecloudplatform.blogspot.com/2015/01/secure-hosting-of-private-Docker-repositories-in-Google-Cloud-Platform.html)
