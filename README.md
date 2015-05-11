@@ -17,7 +17,7 @@ A sample dockerized app to demonstrate Google Container Registry (GCR) functiona
      * In the sidebar on the left, expand `APIs & auth` and select `Credentials`
      * Click `Create new Client ID` and select `Service Account` in the pop-up window
      * Click on `Create Client ID`. A dialog box appears. To proceed, click `Okay, got it`
-* Your new Public/Private key pair is generated and downloaded to your machine. **Please store this carefully since you will not be able to retrieve this from your GDC account. You will need this key pair to set up GCR integration on Shippable.**
+     * Your new Public/Private key pair is generated and downloaded to your machine. **Please store this carefully since you will not be able to retrieve this from your GDC account. You will need this key pair to set up GCR integration on Shippable.**
 
 1. Set up GCR Integration 
 If you want to interact with GCR in any part of your build workflow for your Shippable project, such as using your private images for your builds or pushing images to your repository, you need to connect your GCR project to your Shippable account. 
@@ -33,29 +33,24 @@ If you want to interact with GCR in any part of your build workflow for your Shi
 You have now set up GCR integration at an account level in Shippable. You are now ready to push and pull from GCR. Read on for further instructions. 
 
 -------
-
 ## Pull custom image from GCR
 To enable GCR integration for the repository for which you want to pull a custom image:
 
 * Go to your repository page on Shippable and click on `Integrations` on the right sidebar
 * Click on the dropdown for `Hub` and select the GCR Integration name you want to use (the same Integration Name you had created this as part of the pre-requisites above)
-* On the repo page, go to 'Settings'. Choose the following to pull an image from GCR -
-
-  * Pull image from : gcr.io/gcr_project_id/image_name
+* On the repo page, go to 'Settings'. Choose the following to pull an image from GCR:
+     * Pull image from : gcr.io/gcr_project_id/image_name
 
 -------
 
 ## Push to GCR
-Shippable allows you to push an image to GCR after a successful build. 
+To enable GCR integration for the repository for which you want to push to GCR:
 
-To enable GCR integration for the repository for which you want to push to GCR -
-
-* Go to your repository page on Shippable and click on 'Integrations' on the right sidebar
-* Click on the dropdown for 'Hub' and select the Integration name you want to use.
-* On the repo page, go to `Settings`. Choose the following to push to GCR -
-
-  * Push Build : Yes
-  * Push image to : gcr.io/gcr_project_id/image_name
+* Go to your repository page on Shippable and click on `Integrations` on the right sidebar
+* Click on the dropdown for `Hub` and select the Integration name you want to use
+* On the repo page, go to `Settings`. Choose the following to push to GCR:
+    * Push Build : Yes
+    * Push image to : gcr.io/gcr_project_id/image_name
 
 -------
 
@@ -68,67 +63,63 @@ To use these workflows, your app must be `dockerized`. Details on this can be fo
 
 There are 2 ways to set up Docker build with Shippable - pre CI or post CI. 
 
-###Pre CI Dockerbuild workflow
+### Pre CI Dockerbuild workflow
 
 * Build the image using Dockerfile at the root of your repo
 * Pull code from GitHub/Bitbucket and test code in the container
 * Push container to GCR
 
-Steps:
+** How to use Pre-CI workflow**
 * Enable the repository on Shippable
 * Make sure that GCR integration is set up on Shippable and that GCR is enabled for your repo
 * On the repo page, go to 'Settings'. Choose the following -
-
-  * Docker Build : ON
-  * CI order : Pre-CI
-  * Push Build : Yes if you want to push to GCR, No if you don't want to push to GCR 
-  * Image name : gcr.io/(project id on GDC)/(image name)  
-    We need an image name for the image we build from your Dockerfile, even if you choose not to push to GCR
-  * Source Location : (source code location where tests will be run)
+    * Docker Build : ON
+    * CI order : Pre-CI
+    * Push Build : Yes if you want to push to GCR, No if you don't want to push to GCR 
+    * Image name : gcr.io/(project id on GDC)/(image name)  
+        We need an image name for the image we build from your Dockerfile, even if you choose not to push to GCR
+    * Source Location : (source code location where tests will be run)
   
 * Make sure the Dockerfile for the image you want to build is at the root of your repo
 * Trigger a manual or webhook build
 * After the build is complete, make sure your GDC account shows the image you just pushed. The image should be tagged with the build number on Shippable.
 
-###Post CI Dockerbuild workflow: 
+### Post CI Dockerbuild workflow: 
 
 * Pull image specified from GCR (default is shippable/minv2)
 * Pull code from GitHub/Bitbucket and test in container
 * If CI passes, build container from Dockerfile at the root of the repo
 * Push container to GCR
 
+**How to use Post-CI workflow**
 * Enable the repository on Shippable
 * Make sure that GCR integration is set up on Shippable and that GCR is enabled for your repo
 * On the repo page, go to 'Settings'. Choose the following -
 
-  * Docker Build : ON
-  * Dockerbuild order : Post-CI
-  * Push Build : Yes if you want to push to GCR, No if you don't want to push to GCR 
-  * Push image to : gcr.io/(project id on GDC)/(image name)  
-  * Pull image from : Since your Dockerbuild is happening post CI, enter the image you want to use for CI
+   * Docker Build : ON
+   * Dockerbuild order : Post-CI
+   * Push Build : Yes if you want to push to GCR, No if you don't want to push to GCR 
+   * Push image to : gcr.io/(project id on GDC)/(image name)  
+   * Pull image from : Since your Dockerbuild is happening post CI, enter the image you want to use for CI
 
 * Make sure the Dockerfile for the image you want to build is at the root of your repo
 * Trigger a manual or webhook build
 * After the build is complete, make sure your GDC account shows the image you just pushed. The image should be tagged with the build number on Shippable.
 
-
-###Copying artifacts to prod image:
+### Copying artifacts to prod image:
 
 If you are following the post-CI Dockerbuild workflow and  want to copy some build artifacts to your prod image, you should-
 
 1. Create a shippable/buildoutput directory in your shippable.yml
+      ` before_script:
+         - mkdir -p shippable/buildoutput`
 
- ` before_script:
-     - mkdir -p shippable/buildoutput`
+1. In the after_script section, copy whatever you want to this directory
+      `after_script:
+         - cp -r (your artifacts) ./shippable/buildoutput`
 
-2. In the after_script section, copy whatever you want to this directory
-
-`after_script:
-    - cp -r (your artifacts) ./shippable/buildoutput`
-
-3. In your Dockerfile, you can now use ADD to put the artifacts wherever you want in your prod image
-
-` ADD ./buildoutput/(artifacts file) (target)`
+1. In your Dockerfile, you can now use ADD to put the artifacts wherever you want in your prod image
+    ` ADD ./buildoutput/(artifacts file) (target)`
 
 And that's it. Any artifacts you need will be available in your prod image.
 
