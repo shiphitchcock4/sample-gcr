@@ -1,4 +1,4 @@
-FROM gcr.io/infinite-sight-93921/ubuntu1404_nodejs:latest
+FROM gcr.io/infinite-sight-93921/sample_node_1
 
 COPY . /src
 
