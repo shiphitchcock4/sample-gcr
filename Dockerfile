@@ -1,4 +1,4 @@
-FROM gcr.io/infinite-sight-93921/sample-gcr-nodejs2:master.16.1
+FROM shipimg/ubuntu1404_nodejs
 
 COPY . /src
 
