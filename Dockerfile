@@ -1,4 +1,4 @@
-FROM gcr.io/infinite-sight-93921/appbase
+FROM gcr.io/infinite-sight-93921/sample-gcr-nodejs2
 
 COPY . /src
 
