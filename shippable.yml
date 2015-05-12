@@ -1,2 +1,13 @@
+language: python
+python:
+  - "2.6"
+  #- "2.7"
+  #- "3.2"
+
+install: python setup.py build
 script:
   - true
+#build_image: shippable/minv2
+build_image: shipimg/ubuntu1204_nodejs:latest
+commit_container: gcr.io/infinite-sight-93921/sample_node_1
+cache: true
