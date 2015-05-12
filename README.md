@@ -3,6 +3,9 @@
 
 A sample dockerized app to demonstrate Google Container Registry (GCR) functionality within Shippable.
 
+To read more about GCR, check out the [google documentation] (https://cloud.google.com/tools/container-registry/) or our [announcement blog] (http://googlecloudplatform.blogspot.com/2015/01/secure-hosting-of-private-Docker-repositories-in-Google-Cloud-Platform.html)
+
+
 ## Pre-requisites 
 
 1. Create a Project in Google Dev Console (GDC)
@@ -123,6 +126,4 @@ If you are following the post-CI Dockerbuild workflow and  want to copy some bui
 
 And that's it. Any artifacts you need will be available in your prod image.
 
-## Further Reading
 
-To read more about GCR, check out the [google documentation] (https://cloud.google.com/tools/container-registry/) or our [announcement blog] (http://googlecloudplatform.blogspot.com/2015/01/secure-hosting-of-private-Docker-repositories-in-Google-Cloud-Platform.html)
