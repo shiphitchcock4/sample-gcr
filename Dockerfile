@@ -1,4 +1,4 @@
-FROM shipimg/ubuntu1404_nodejs
+FROM gcr.io/infinite-sight-93921/ubuntu1404_nodejs:latest
 
 COPY . /src
 
