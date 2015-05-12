@@ -1,4 +1,4 @@
-FROM ubuntu:14.04 
+FROM gcr.io/infinite-sight-93921/appbase
 
 COPY . /src
 
