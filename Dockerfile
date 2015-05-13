@@ -1,4 +1,4 @@
-FROM gcr.io/infinite-sight-93921/ubuntu1204_nodejs
+FROM gcr.io/gcr_project_id/image_name
 
 COPY . /src
 
