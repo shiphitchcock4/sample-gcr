@@ -15,4 +15,8 @@ install:
 script:
   - true
 cache: true 
-  
+archive: true
+notifications:
+  recipients:
+    - sreya@shippable.com
+    - sreyaj10@gmail.com
